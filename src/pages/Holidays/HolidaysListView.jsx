@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import jsonHolidays from '../../assets/global_public_holiday.json';
-import { IonList, IonItem, IonLabel, IonNote } from '@ionic/react';
+import { IonList, IonItem, IonLabel, IonAvatar } from '@ionic/react';
 import HolidayPageTopBar from './components/HolidayPageTopBar.jsx';
 
 class HolidaysListView extends Component {
@@ -23,15 +23,19 @@ class HolidaysListView extends Component {
                 return (
                     <div key={day[0]}>
                         <IonItem>
+                            <IonAvatar>
+                                <h6 style={{
+                                    color: '#2196F3',
+                                }}>
+                                    {(day[1]).substring(0,3)}
+                                </h6>
+                            </IonAvatar>
                             <IonLabel style={{
                                 whiteSpace: 'normal',
                             }}>
+                                <p>{day[0]}</p>
                                 <h5><p>{day[2]}</p></h5>
-                                <span style={{
-                                    color: '#2196F3',
-                                }}><p>{day[1]}</p></span>
                             </IonLabel>
-                            <IonNote slot="end" color="primary"><h6>{day[0]}</h6></IonNote>
                         </IonItem>
                     </div>
                 );
