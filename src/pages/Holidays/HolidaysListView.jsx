@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import jsonHolidays from '../../assets/global_public_holiday.json';
 import { IonList, IonItem, IonLabel, IonNote } from '@ionic/react';
+import HolidayPageTopBar from './components/HolidayPageTopBar.jsx';
 
 class HolidaysListView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            country: 'Bangladesh',
-            year: '2019',
+            country: props.country,
+            year: props.year,
         };
     }
 
@@ -25,7 +26,7 @@ class HolidaysListView extends Component {
                             <IonLabel style={{
                                 whiteSpace: 'normal',
                             }}>
-                                <h5>{day[2]}</h5>
+                                <h5><p>{day[2]}</p></h5>
                                 <span style={{
                                     color: '#2196F3',
                                 }}><p>{day[1]}</p></span>
@@ -42,12 +43,18 @@ class HolidaysListView extends Component {
 
 
     render() {
+        const { country, year } = this.props;
         return (
-            <div>
-                <IonList>
-                    {this.renderHolidays()}
-                </IonList>
-            </div>
+            <>
+                <HolidayPageTopBar countryName={country} year={`${year}`} />
+                <div style={{
+                    marginTop: '100px',
+                }}>
+                    <IonList>
+                        {this.renderHolidays()}
+                    </IonList>
+                </div>
+            </>
         );
     }
 }
