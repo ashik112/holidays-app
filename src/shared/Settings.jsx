@@ -3,29 +3,31 @@ import { IonFab, IonFabButton, IonIcon, IonModal, IonButton, IonList, IonListHea
 import settings from 'ionicons/icons/imports/settings';
 import Country from './Country';
 import Years from './Years';
+import storageService from '../services/storeageService';
 
 class Settings extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modal: false,
-    }
-  }
-
   render() {
-    const { modal } = this.state;
     return (
       <>
-        <IonModal isOpen={modal}>
+        <IonModal isOpen={this.props.open}>
           <IonList>
             <IonListHeader>Settings</IonListHeader>
-            <Country />
-            <Years />
+            <Country initialValue={this.props.country} />
+            <Years initialValue={this.props.year} />
           </IonList>
-          <IonButton onClick={() => this.setState({ modal: false })}>Done</IonButton>
+          <IonButton onClick={async () => {
+            const country = await storageService.getObject('country');
+            const year = await storageService.getObject('year');
+            if (country && year) {
+              const { onDone } = this.props;
+              onDone();
+            }
+          }}>Done</IonButton>
         </IonModal>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton onClick={() => this.setState({ modal: true })}>
+          <IonFabButton onClick={() => {
+            this.props.onOpen();
+          }}>
             <IonIcon icon={settings} />
           </IonFabButton>
         </IonFab>

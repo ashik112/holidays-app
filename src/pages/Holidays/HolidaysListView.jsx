@@ -20,7 +20,7 @@ class HolidaysListView extends Component {
             if (day[0]) {
                 // ++count;
                 return (
-                    <div key={day[0]}>
+                    <div key={`${day[0]}${day[1]}${day[2]}`}>
                         <IonItem>
                             <IonAvatar>
                                 <h6 style={{
