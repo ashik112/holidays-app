@@ -1,5 +1,7 @@
 {
   "name": "holidays-app",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }
