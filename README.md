@@ -1,5 +1,5 @@
 # holidays-app
 
-Only available for learning and must not be used for earning money.
+Only available for learning and private use. Must not be used as it is for commercial purposes.
 
 Copyright © 2019 ashik112
