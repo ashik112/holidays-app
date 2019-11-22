@@ -13,8 +13,7 @@ class HolidaysListView extends Component {
     }
 
     renderHolidays = () => {
-        const { Bangladesh } = jsonHolidays;
-        const holidays = Bangladesh['2019'];
+        const holidays = jsonHolidays[this.state.country][this.state.year];
         let list = [];
         // let count = 0;
         list = holidays.map((day, index) => {
