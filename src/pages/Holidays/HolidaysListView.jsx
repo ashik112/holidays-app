@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import jsonHolidays from '../../assets/global_public_holiday.json';
-import { IonList, IonItem, IonLabel, IonAvatar, IonIcon } from '@ionic/react';
+import { IonList, IonItem, IonLabel, IonAvatar } from '@ionic/react';
 import { Plugins } from '@capacitor/core';
 import HolidayPageTopBar from './components/HolidayPageTopBar.jsx';
-import alert from 'ionicons/icons/imports/arrow-dropright-circle';
 
 const { Browser } = Plugins;
 
@@ -21,10 +20,8 @@ class HolidaysListView extends Component {
         const holidays = jsonHolidays[this.state.country][this.state.year];
         let list = [];
         if(!holidays) return list;
-        // let count = 0;
         list = holidays.map((day, index) => {
             if (day[0]) {
-                // ++count;
                 return (
                     <div key={`${day[0]}${day[1]}${day[2]}${day[4]}`}>
                         <IonItem
