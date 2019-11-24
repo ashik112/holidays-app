@@ -25,7 +25,7 @@ const Country = ({ initialValue }) => {
     return (
         <IonItem>
             <IonLabel>Country</IonLabel>
-            <IonSelect value={initialValue} onIonChange={countryChange} cancelText="Cancel" interface="alert" placeholder="Select one">
+            <IonSelect value={initialValue} onIonChange={countryChange} cancelText="Cancel" interface="action-sheet" placeholder="Select one">
                 {renderCountryOptions()}
             </IonSelect>
         </IonItem>
