@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "holidays-app",
+  "appId": "com.holiday.global",
+  "appName": "HolidayGlobal",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
