@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import jsonHolidays from '../../assets/global_public_holiday.json';
-import { IonList, IonItem, IonLabel, IonAvatar } from '@ionic/react';
+import { IonList, IonItem, IonLabel, IonAvatar, IonIcon } from '@ionic/react';
+import { Plugins } from '@capacitor/core';
 import HolidayPageTopBar from './components/HolidayPageTopBar.jsx';
+import alert from 'ionicons/icons/imports/arrow-dropright-circle';
+
+const { Browser } = Plugins;
 
 class HolidaysListView extends Component {
     constructor(props) {
@@ -22,8 +26,16 @@ class HolidaysListView extends Component {
             if (day[0]) {
                 // ++count;
                 return (
-                    <div key={`${day[0]}${day[1]}${day[2]}`}>
-                        <IonItem>
+                    <div key={`${day[0]}${day[1]}${day[2]}${day[4]}`}>
+                        <IonItem
+                            detail
+                            onClick={async()=>{
+                                if(day[5]) {
+                                    await Browser.open({ url: `${day[5]}` });
+                                }
+                            }}
+                        >
+                            {/* <IonIcon color="primary" slot="end" icon={alert}/> */}
                             <IonAvatar>
                                 <h6 style={{
                                     color: '#2196F3',
@@ -34,8 +46,9 @@ class HolidaysListView extends Component {
                             <IonLabel style={{
                                 whiteSpace: 'normal',
                             }}>
-                                <p>{day[0]}</p>
-                                <h5><p>{day[2]}</p></h5>
+                                <h3><b>{day[0]}</b></h3>
+                                <h2><p>{day[2]}</p></h2>
+                                <p>{day[3]}{day[4]!== ' '? ', ': ''}{day[4]}</p>
                             </IonLabel>
                         </IonItem>
                     </div>
