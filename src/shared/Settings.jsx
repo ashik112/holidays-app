@@ -24,8 +24,8 @@ class Settings extends Component {
             }
           }}>Done</IonButton>
         </IonModal>
-        <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton onClick={() => {
+        <IonFab vertical="top" horizontal="end" slot="fixed">
+          <IonFabButton size="small" color="light" onClick={() => {
             this.props.onOpen();
           }}>
             <IonIcon icon={settings} />
