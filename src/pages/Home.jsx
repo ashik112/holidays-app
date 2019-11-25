@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import HolidaysListView from './Holidays/HolidaysListView';
 import Settings from '../shared/Settings';
 import storageService from '../services/storeageService';
+import jsonHolidays from '../assets/global_public_holiday';
 
 class Home extends Component {
 	constructor(props) {
@@ -10,15 +11,14 @@ class Home extends Component {
 		this.doneSettings = this.doneSettings.bind(this);
 		this.onClickSettings = this.onClickSettings.bind(this);
 		this.state = {
-			country: null,
-			year: null,
 			openSettings: false,
 			loaded: false,
+			countryData: {},
 		};
 	}
 
 	componentDidMount() {
-		this.doneSettings();
+		this.doneSettings().then();
 	}
 
 	onClickSettings = () => {
@@ -30,32 +30,50 @@ class Home extends Component {
 	doneSettings = async () => {
 		await this.setState({
 			loaded: false,
-		})
+		});
 		const country = await storageService.getObject('country');
 		const year = await storageService.getObject('year');
+		const holidays = jsonHolidays[country][year];
+		const list = [];
+		for (let i=0; i < holidays.length;++i){
+			const holiday = holidays[i];
+			list.push({
+				day: holiday[0],
+				weekDay: holiday[1],
+				name: holiday[2],
+				type: holiday[3],
+				location: holiday[4],
+				detailsURL: holiday[5],
+			});
+		}
 		await this.setState({
-			country,
-			year,
+			countryData: {
+				country: country,
+				year: year,
+				days: list,
+			},
 			openSettings: false,
 			loaded: true,
 		});
 	};
 
 	render() {
+		const { countryData, openSettings, loaded } = this.state;
+		const { country, year } = countryData;
 		return (
 			<IonPage>
 				<IonContent fullscreen>
 					{
-						this.state.loaded && (
+						loaded && (
 							<>
 								<Settings
-									country={this.state.country}
-									year={this.state.year}
+									country={country}
+									year={year}
 									onOpen={this.onClickSettings}
 									onDone={this.doneSettings}
-									open={(!(this.state.country) || !(this.state.year) || (this.state.openSettings))}
+									open={(!(countryData.country) || !(countryData.year) || (openSettings))}
 								/>
-								{(this.state.country) && (this.state.year) && (<HolidaysListView country={this.state.country} year={this.state.year} />)}
+								{(country) && (year) && (<HolidaysListView countryData={countryData} />)}
 							</>
 						)
 
@@ -64,6 +82,6 @@ class Home extends Component {
 			</IonPage>
 		);
 	}
-};
+}
 
 export default withIonLifeCycle(Home);
