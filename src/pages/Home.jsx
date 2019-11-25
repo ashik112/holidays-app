@@ -4,13 +4,18 @@ import HolidaysListView from './Holidays/HolidaysListView';
 import Settings from '../shared/Settings';
 import storageService from '../services/storeageService';
 import jsonHolidays from '../assets/global_public_holiday';
+import HolidaysTableView from './Holidays/HolidaysTableView';
+import HolidayPageTopBar from './Holidays/components/HolidayPageTopBar';
 
 class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.doneSettings = this.doneSettings.bind(this);
 		this.onClickSettings = this.onClickSettings.bind(this);
+		this.switchView = this.switchView.bind(this);
+		this.contentRef = React.createRef();
 		this.state = {
+			tableView: true,
 			openSettings: false,
 			loaded: false,
 			countryData: {},
@@ -33,36 +38,47 @@ class Home extends Component {
 		});
 		const country = await storageService.getObject('country');
 		const year = await storageService.getObject('year');
-		const holidays = jsonHolidays[country][year];
-		const list = [];
-		for (let i=0; i < holidays.length;++i){
-			const holiday = holidays[i];
-			list.push({
-				day: holiday[0],
-				weekDay: holiday[1],
-				name: holiday[2],
-				type: holiday[3],
-				location: holiday[4],
-				detailsURL: holiday[5],
+		if(country===null || year===null) {
+			await this.setState({
+				countryData: {
+					country: null,
+					year: null,
+					days: [],
+				},
+				openSettings: true,
+				loaded: true,
+			});
+		} else {
+			await this.setState({
+				countryData: {
+					country: country,
+					year: year,
+					days: jsonHolidays[country][year],
+				},
+				openSettings: false,
+				loaded: true,
 			});
 		}
-		await this.setState({
-			countryData: {
-				country: country,
-				year: year,
-				days: list,
-			},
-			openSettings: false,
-			loaded: true,
+	};
+
+	switchView = () => {
+		const { tableView } = this.state;
+		this.setState({
+			tableView: !tableView,
 		});
+		this.contentRef.current.scrollToTop();
 	};
 
 	render() {
-		const { countryData, openSettings, loaded } = this.state;
+		const { countryData, openSettings, loaded, tableView } = this.state;
 		const { country, year } = countryData;
 		return (
 			<IonPage>
-				<IonContent fullscreen>
+				<IonContent
+					fullscreen
+					ref={this.contentRef}
+					scrollEvents={true}
+				>
 					{
 						loaded && (
 							<>
@@ -71,9 +87,12 @@ class Home extends Component {
 									year={year}
 									onOpen={this.onClickSettings}
 									onDone={this.doneSettings}
-									open={(!(countryData.country) || !(countryData.year) || (openSettings))}
+									switchView={this.switchView}
+									open={(!(country) || !(year) || (openSettings))}
 								/>
-								{(country) && (year) && (<HolidaysListView countryData={countryData} />)}
+								<HolidayPageTopBar countryName={country} year={`${year}`} />
+								{(country) && (year) && tableView && (<HolidaysTableView countryData={countryData} />)}
+								{(country) && (year) && !tableView && (<HolidaysListView countryData={countryData} />)}
 							</>
 						)
 

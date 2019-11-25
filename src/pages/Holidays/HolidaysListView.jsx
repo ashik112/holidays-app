@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { IonList, IonItem, IonLabel, IonAvatar } from '@ionic/react';
 import { Plugins } from '@capacitor/core';
-import HolidayPageTopBar from './components/HolidayPageTopBar.jsx';
 
 const { Browser } = Plugins;
 
@@ -24,9 +23,9 @@ class HolidaysListView extends Component {
                             {/* <IonIcon color="primary" slot="end" icon={alert}/> */}
                             <IonAvatar>
                                 <h6 style={{
-                                    color: '#2196F3',
+                                    color: 'rgb(117, 201, 131)',
                                 }}>
-                                    {(weekDay).substring(0,3)}
+                                    <b>{(weekDay).substring(0,3)}</b>
                                 </h6>
                             </IonAvatar>
                             <IonLabel style={{
@@ -46,10 +45,8 @@ class HolidaysListView extends Component {
 
 
     render() {
-        const { countryData: {country, year} } = this.props;
         return (
             <>
-                <HolidayPageTopBar countryName={country} year={`${year}`} />
                 <div style={{
                     marginTop: '90px',
                 }}>
