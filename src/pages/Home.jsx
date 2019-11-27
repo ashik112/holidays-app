@@ -32,6 +32,12 @@ class Home extends Component {
 		})
 	};
 
+	cancelSettings = async () => {
+		await this.setState({
+			openSettings: false,
+		});
+	};
+
 	doneSettings = async () => {
 		await this.setState({
 			loaded: false,
@@ -87,6 +93,7 @@ class Home extends Component {
 									year={year}
 									onOpen={this.onClickSettings}
 									onDone={this.doneSettings}
+									onCancel={this.cancelSettings}
 									switchView={this.switchView}
 									open={(!(country) || !(year) || (openSettings))}
 								/>
