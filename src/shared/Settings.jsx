@@ -31,7 +31,7 @@ class Settings extends Component {
           horizontal="end"
           slot="fixed"
           style={{
-            marginTop: '14px'
+            marginTop: '11px'
           }}
         >
           <IonFabButton color="light" size="small">

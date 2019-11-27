@@ -47,13 +47,9 @@ class HolidaysListView extends Component {
     render() {
         return (
             <>
-                <div style={{
-                    marginTop: '90px',
-                }}>
-                    <IonList>
-                        {this.renderHolidays()}
-                    </IonList>
-                </div>
+                <IonList>
+                    {this.renderHolidays()}
+                </IonList>
             </>
         );
     }

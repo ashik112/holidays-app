@@ -90,9 +90,27 @@ class Home extends Component {
 									switchView={this.switchView}
 									open={(!(country) || !(year) || (openSettings))}
 								/>
-								<HolidayPageTopBar countryName={country} year={`${year}`} />
-								{(country) && (year) && tableView && (<HolidaysTableView countryData={countryData} />)}
-								{(country) && (year) && !tableView && (<HolidaysListView countryData={countryData} />)}
+								<div
+									style={{
+										display: 'block',
+										position: "fixed",
+										top: 0,
+										width: '100%',
+										zIndex: 1,
+									}}
+								>
+									<HolidayPageTopBar
+										countryName={country}
+										year={`${year}`}
+									/>
+								</div>
+								<div style={{
+									position: "relative",
+									marginTop: '97px',
+								}}>
+									{(country) && (year) && tableView && (<HolidaysTableView style={{ position: 'relative' }} countryData={countryData} />)}
+									{(country) && (year) && !tableView && (<HolidaysListView countryData={countryData} />)}
+								</div>
 							</>
 						)
 

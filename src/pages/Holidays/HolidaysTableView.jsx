@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table} from 'react-bootstrap';
 import { Plugins } from '@capacitor/core';
+import { IonIcon } from "@ionic/react";
+import arrowDown from 'ionicons/icons/imports/arrow-dropdown';
+import arrowUp from 'ionicons/icons/imports/arrow-dropup';
 
 const { Browser } = Plugins;
 
@@ -14,7 +17,6 @@ const Styles = styled.div`
      background-color: rgba(39, 156, 250, 0.5); // Choose your own color here
    }
   table {
-    margin-top: 100px;
     font-size: 12px;
     border-spacing: 0rem;
     border: 0px solid black;
@@ -72,7 +74,16 @@ function HolidayTable({columns, data}) {
         <tr {...headerGroup.getHeaderGroupProps()}>
           {headerGroup.headers.map(column => (
             <th style={{ width: column.width }} {...column.getHeaderProps(column.getSortByToggleProps())}>
-              {column.render('Header')} {column.isSorted ? (column.isSortedDesc? ' 🔽': ' 🔼') : '🔼🔽'}
+              {
+                  column.render('Header')} {
+                  column.isSorted ?
+                      (column.isSortedDesc?
+                          <IonIcon icon={arrowUp} /> : <IonIcon icon={arrowDown} />
+                      ) :
+                      <>
+                          <IonIcon icon={arrowUp} /> <IonIcon icon={arrowDown} />
+                      </>
+              }
             </th>
           ))}
         </tr>
@@ -106,7 +117,7 @@ function HolidaysTableView({countryData}) {
   const columns = useMemo(
     () => [
       {
-        Header: 'Date',
+        Header: '',
         accessor: 'day',
         sortType: 'basic',
       },
