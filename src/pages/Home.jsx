@@ -7,6 +7,17 @@ import jsonHolidays from '../assets/global_public_holiday';
 import HolidaysTableView from './Holidays/HolidaysTableView';
 import HolidayPageTopBar from './Holidays/components/HolidayPageTopBar';
 
+import { Plugins } from '@capacitor/core';
+import { AdOptions, AdSize, AdPosition } from 'capacitor-admob';
+
+const { AdMob } = Plugins;
+
+const options = {
+	adId: 'ca-app-pub-3940256099942544/6300978111',
+	adSize: AdSize.Banner,
+	position: AdPosition.BOTTOM_CENTER
+};
+
 class Home extends Component {
 	constructor(props) {
 		super(props);
@@ -24,6 +35,24 @@ class Home extends Component {
 
 	componentDidMount() {
 		this.doneSettings().then();
+		try {
+			// Show Banner Ad
+			AdMob.showBanner(options)
+				.then(
+					(value) => {
+						console.log(value);  // true
+					},
+					(error) => {
+						console.log(error); // show error
+					}
+				);
+
+			AdMob.addListener('onAdLoaded', (info) => {
+				console.log("Banner Ad Loaded");
+			});
+		} catch (e) {
+			console.log(e);
+		}
 	}
 
 	onClickSettings = () => {
@@ -55,11 +84,15 @@ class Home extends Component {
 				loaded: true,
 			});
 		} else {
+			let tempDays = [];
+			if(jsonHolidays && jsonHolidays[country] && jsonHolidays[country][year]) {
+				tempDays = jsonHolidays[country][year];
+			}
 			await this.setState({
 				countryData: {
 					country: country,
 					year: year,
-					days: jsonHolidays[country][year],
+					days: tempDays,
 				},
 				openSettings: false,
 				loaded: true,
