@@ -4,5 +4,6 @@
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
-  "cordova": {}
+  "cordova": {},
+  "linuxAndroidStudioPath": "/media/ashik/Programs/android-studio/bin/studio.sh"
 }
