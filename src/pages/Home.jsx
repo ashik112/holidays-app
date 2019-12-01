@@ -8,7 +8,7 @@ import HolidaysTableView from './Holidays/HolidaysTableView';
 import HolidayPageTopBar from './Holidays/components/HolidayPageTopBar';
 
 import { Plugins } from '@capacitor/core';
-import { AdOptions, AdSize, AdPosition } from 'capacitor-admob';
+import { AdSize, AdPosition } from 'capacitor-admob';
 
 const { AdMob } = Plugins;
 
