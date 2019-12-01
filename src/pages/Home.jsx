@@ -1,7 +1,7 @@
 import { IonContent, IonPage, withIonLifeCycle } from '@ionic/react';
 import React, { Component } from 'react';
 import HolidaysListView from './Holidays/HolidaysListView';
-import Settings from '../shared/Settings';
+//import Settings from '../shared/Settings';
 import storageService from '../services/storeageService';
 import jsonHolidays from '../assets/global_public_holiday';
 import HolidaysTableView from './Holidays/HolidaysTableView';
@@ -9,9 +9,13 @@ import HolidayPageTopBar from './Holidays/components/HolidayPageTopBar';
 
 import { Plugins } from '@capacitor/core';
 import { AdSize, AdPosition } from 'capacitor-admob';
+import CountryFab from '../shared/CountryFab';
+import SwitchViewFab from '../shared/SwitchViewFab';
 
+// eslint-disable-next-line no-unused-vars
 const { AdMob } = Plugins;
 
+// eslint-disable-next-line no-unused-vars
 const options = {
 	adId: 'ca-app-pub-3940256099942544/6300978111',
 	adSize: AdSize.Banner,
@@ -37,7 +41,7 @@ class Home extends Component {
 		this.doneSettings().then();
 		try {
 			// Show Banner Ad
-			AdMob.showBanner(options)
+			/*AdMob.showBanner(options)
 				.then(
 					(value) => {
 						console.log(value);  // true
@@ -45,11 +49,11 @@ class Home extends Component {
 					(error) => {
 						console.log(error); // show error
 					}
-				);
+				);*/
 
-			AdMob.addListener('onAdLoaded', (info) => {
+			/*AdMob.addListener('onAdLoaded', (info) => {
 				console.log("Banner Ad Loaded");
-			});
+			});*/
 		} catch (e) {
 			console.log(e);
 		}
@@ -121,14 +125,16 @@ class Home extends Component {
 					{
 						loaded && (
 							<>
-								<Settings
+								<CountryFab
 									country={country}
 									year={year}
 									onOpen={this.onClickSettings}
 									onDone={this.doneSettings}
 									onCancel={this.cancelSettings}
-									switchView={this.switchView}
 									open={(!(country) || !(year) || (openSettings))}
+								/>
+								<SwitchViewFab
+									switchView={this.switchView}
 								/>
 								<div
 									style={{
