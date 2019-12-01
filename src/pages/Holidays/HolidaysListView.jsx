@@ -33,7 +33,7 @@ class HolidaysListView extends Component {
                             }}>
                                 <h3><b>{day}</b></h3>
                                 <h2><p>{name}</p></h2>
-                                <p>{type}{location!== ' '? ', ': ''}{location}</p>
+                                <p style={{ color: 'rgb(117, 201, 131)' }}>{type}{location!== ' ' && location !== '' && location !== undefined? ', ': ''}{location}</p>
                             </IonLabel>
                         </IonItem>
                     </div>
