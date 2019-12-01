@@ -29,7 +29,7 @@
   --ion-color-documentation: #b16be3;
   --ion-color-navigation: #6600cc;
 
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: rgb(117, 201, 131);
   /*--ion-color-primary: #3880ff;*/
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;

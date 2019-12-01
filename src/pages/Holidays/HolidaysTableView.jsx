@@ -7,6 +7,7 @@ import { Plugins } from '@capacitor/core';
 import { IonIcon } from "@ionic/react";
 import arrowDown from 'ionicons/icons/imports/arrow-dropdown';
 import arrowUp from 'ionicons/icons/imports/arrow-dropup';
+import goToIcon from 'ionicons/icons/imports/information-circle-outline';
 
 const { Browser } = Plugins;
 
@@ -134,6 +135,9 @@ function HolidaysTableView({countryData}) {
       {
         Header: 'Type',
         accessor: 'type',
+        Cell: data => {
+          return <span><span>{data.row.original.type}</span><IonIcon color="primary" style={{float: 'right'}} icon={goToIcon}/></span>;
+        },
       },
       {
         Header: 'Details',
