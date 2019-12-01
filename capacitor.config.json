@@ -1,6 +1,6 @@
 {
   "appId": "com.holiday.global",
-  "appName": "HolidayGlobal",
+  "appName": "World Public Holiday",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
