@@ -22,7 +22,7 @@ const Years = ({ initialValue }) => {
     return (
         <IonItem>
             <IonLabel>Default Year</IonLabel>
-            <IonSelect interface="popover" value={initialValue} onIonChange={yearChange} cancelText="Cancel" placeholder="Select one">
+            <IonSelect value={initialValue} onIonChange={yearChange} cancelText="Cancel" placeholder="Select one">
                 {renderYearOptions()}
             </IonSelect>
         </IonItem>
