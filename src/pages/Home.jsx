@@ -66,6 +66,7 @@ class Home extends Component {
 	};
 
 	cancelSettings = async () => {
+	    console.log("cancel settings from home", this.state);
 		await this.setState({
 			openSettings: false,
 		});
@@ -123,7 +124,7 @@ class Home extends Component {
 					scrollEvents={true}
 				>
 					{
-						loaded && (
+						loaded && openSettings && (
 							<>
 								<CountryFab
 									country={country}
