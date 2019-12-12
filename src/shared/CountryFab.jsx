@@ -14,7 +14,6 @@ class CountryFab extends Component {
   componentDidMount() {
     const { onCancel } = this.props;
     App.addListener('backButton', (data) => {
-      console.log("on close");
       onCancel();
     });
   }
