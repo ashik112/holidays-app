@@ -1,4 +1,13 @@
-import { IonContent, IonPage, withIonLifeCycle } from '@ionic/react';
+import {
+  IonContent,
+  IonPage,
+  withIonLifeCycle,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonCardTitle,
+  IonIcon, IonButton
+} from '@ionic/react';
 import React, { Component } from 'react';
 import HolidaysListView from './Holidays/HolidaysListView';
 //import Settings from '../shared/Settings';
@@ -6,7 +15,7 @@ import storageService from '../services/storeageService';
 import jsonHolidays from '../assets/global_public_holiday';
 import HolidaysTableView from './Holidays/HolidaysTableView';
 import HolidayPageTopBar from './Holidays/components/HolidayPageTopBar';
-
+import iconFlag from 'ionicons/icons/imports/flag';
 import { Plugins } from '@capacitor/core';
 import { AdSize, AdPosition } from 'capacitor-admob';
 import CountryFab from '../shared/CountryFab';
@@ -131,7 +140,7 @@ class Home extends Component {
 									onOpen={this.onClickSettings}
 									onDone={this.doneSettings}
 									onCancel={this.cancelSettings}
-									open={(!(country) || !(year) || (openSettings))}
+									open={(openSettings)}
 								/>
 								<SwitchViewFab
 									switchView={this.switchView}
@@ -146,8 +155,8 @@ class Home extends Component {
 									}}
 								>
 									<HolidayPageTopBar
-										countryName={country}
-										year={`${year}`}
+										countryName={country===null? 'UNKNOWN' : country}
+										year={`${year===null? 'UNKNOWN' : year}`}
 									/>
 								</div>
 								<div style={{
@@ -156,10 +165,19 @@ class Home extends Component {
 								}}>
 									{(country) && (year) && tableView && (<HolidaysTableView style={{ position: 'relative' }} countryData={countryData} />)}
 									{(country) && (year) && !tableView && (<HolidaysListView countryData={countryData} />)}
+									{((!country) || (!year)) && (
+									    <IonCard>
+                                          <IonCardHeader>
+                                            <IonCardTitle>No Data!</IonCardTitle>
+                                          </IonCardHeader>'
+                                          <IonCardContent>
+                                            Please select country and year. Press <IonIcon icon={iconFlag} />
+                                          </IonCardContent>
+                                        </IonCard>
+                                    )}
 								</div>
 							</>
 						)
-
 					}
 				</IonContent>
 			</IonPage>
