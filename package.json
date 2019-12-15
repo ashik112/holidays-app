@@ -15,6 +15,7 @@
     "@types/react-router-dom": "^5.1.0",
     "bootstrap": "^4.3.1",
     "capacitor-admob": "0.0.9",
+    "date-fns": "^2.8.1",
     "ionicons": "^4.6.3",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",

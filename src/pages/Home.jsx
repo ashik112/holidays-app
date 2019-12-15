@@ -6,7 +6,7 @@ import {
   IonCardHeader,
   IonCardContent,
   IonCardTitle,
-  IonIcon, IonButton
+  IonIcon,
 } from '@ionic/react';
 import React, { Component } from 'react';
 import HolidaysListView from './Holidays/HolidaysListView';
