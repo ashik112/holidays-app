@@ -8,6 +8,7 @@ import { IonIcon } from "@ionic/react";
 import arrowDown from 'ionicons/icons/imports/arrow-dropdown';
 import arrowUp from 'ionicons/icons/imports/arrow-dropup';
 import goToIcon from 'ionicons/icons/imports/information-circle-outline';
+import {getDayMonth} from "../../services/dateService";
 
 const { Browser } = Plugins;
 
@@ -121,6 +122,9 @@ function HolidaysTableView({countryData}) {
         Header: '',
         accessor: 'day',
         sortType: 'basic',
+        Cell: (data) => {
+          return <span>{getDayMonth(data.row.original.day)}</span>;
+        },
       },
       {
         Header: 'Day',
