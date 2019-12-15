@@ -45,9 +45,10 @@ class HolidaysListView extends Component {
                             <IonLabel style={{
                                 whiteSpace: 'normal',
                             }}>
-                              <h3><b>{getDayMonth(day)}</b></h3>{upcomingBadge}&nbsp;{todayBadge}
+                              <h3><b>{getDayMonth(day)}</b></h3>
                                 <h2><p>{name}</p></h2>
                                 <p style={{ color: 'rgb(117, 201, 131)' }}>{type}{location!== ' ' && location !== '' && location !== undefined? ', ': ''}{location}</p>
+                                {upcomingBadge}&nbsp;{todayBadge}
                             </IonLabel>
                         </IonItem>
                     </div>

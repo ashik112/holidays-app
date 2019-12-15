@@ -24,14 +24,13 @@ getDayMonth = (date) => {
 };
 
 export const compareWithToday = (d) => {
-  // console.log(d);
-  const today = new Date();
-  const date = new Date(d);
+  const today = new Date().setHours(0,0,0,0);
+  const date = new Date(d).setHours(0,0,0,0);
   return compareAsc(date, today);
 };
 
 export const isEqualDay = (d1, d2) => {
-  const date1 = new Date(d1);
-  const date2 = new Date(d2);
+  const date1 = new Date(d1).setHours(0,0,0,0);
+  const date2 = new Date(d2).setHours(0,0,0,0);
   return compareAsc(date1, date2) === 0;
 };

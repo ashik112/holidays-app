@@ -137,11 +137,7 @@ function HolidaysTableView({countryData}) {
         sortType: 'basic',
         Cell: (data) => {
           return (
-            <span>
-              {<>{isEqualDay(data.row.original.day, upcoming) && <><IonBadge color="tertiary">Upcoming</IonBadge><br/></>}</>}
-              {<>{compareWithToday(data.row.original.day) === 0 && <><IonBadge color="success">Today!</IonBadge><br/></>}</>}
               <span>{getDayMonth(data.row.original.day)}</span>
-            </span>
           );
         },
       },
@@ -154,6 +150,15 @@ function HolidaysTableView({countryData}) {
       {
         Header: 'Name',
         accessor: 'name',
+        Cell: (data) => {
+          return (
+            <span>
+              <span>{data.row.original.name}</span>&nbsp;&nbsp;
+              {isEqualDay(data.row.original.day, upcoming) && <IonBadge color="tertiary">Upcoming</IonBadge>}&nbsp;&nbsp;
+              {compareWithToday(data.row.original.day) === 0 && <IonBadge color="success">Today!</IonBadge>}
+            </span>
+          );
+        },
       },
       {
         Header: 'Type',
