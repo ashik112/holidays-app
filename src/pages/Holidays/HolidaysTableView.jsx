@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table} from 'react-bootstrap';
 import { Plugins } from '@capacitor/core';
-import { IonIcon } from "@ionic/react";
+import {IonIcon, IonBadge} from "@ionic/react";
 import arrowDown from 'ionicons/icons/imports/arrow-dropdown';
 import arrowUp from 'ionicons/icons/imports/arrow-dropup';
 import goToIcon from 'ionicons/icons/imports/information-circle-outline';
-import {getDayMonth} from "../../services/dateService";
+import {compareWithToday, getDayMonth, isEqualDay} from "../../services/dateService";
 
 const { Browser } = Plugins;
 
@@ -116,6 +116,19 @@ function HolidayTable({columns, data}) {
 }
 
 function HolidaysTableView({countryData}) {
+  // const [upcoming, setUpcoming] = useState(null);
+  let upcoming = null;
+  if(countryData && countryData.days) {
+    for(let i = 0; i < countryData.days.length ; i++) {
+      const item = countryData.days[i];
+      if(item) {
+        if(compareWithToday(item.day) > 0) {
+          upcoming = item.day;
+          break;
+        }
+      }
+    }
+  }
   const columns = useMemo(
     () => [
       {
@@ -123,7 +136,13 @@ function HolidaysTableView({countryData}) {
         accessor: 'day',
         sortType: 'basic',
         Cell: (data) => {
-          return <span>{getDayMonth(data.row.original.day)}</span>;
+          return (
+            <span>
+              {<>{isEqualDay(data.row.original.day, upcoming) && <><IonBadge color="tertiary">Upcoming</IonBadge><br/></>}</>}
+              {<>{compareWithToday(data.row.original.day) === 0 && <><IonBadge color="success">Today!</IonBadge><br/></>}</>}
+              <span>{getDayMonth(data.row.original.day)}</span>
+            </span>
+          );
         },
       },
       {
@@ -149,7 +168,7 @@ function HolidaysTableView({countryData}) {
         show: false,
       },
     ],
-    [],
+    [upcoming],
   );
   return (
     <Styles>
