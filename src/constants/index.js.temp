@@ -1,0 +1,4 @@
+export const admobCredentials = {
+  adID: 'ca-app-pub-3940256099942544/6300978111',
+  appID: 'ca-app-pub-75xxxxxxxxxxx161~87xxxxxx08',
+};
