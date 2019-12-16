@@ -27,3 +27,4 @@ capacitor.config.json
 # android/
 
 .idea
+/src/constants/index.js
