@@ -54,16 +54,16 @@ class Home extends Component {
       AdMob.showBanner(options)
         .then(
           (value) => {
-            // console.log(value);  // true
+            console.log(value);  // true
           },
           (error) => {
-            // console.log(error); // show error
+            console.log(error); // show error
           }
         );
 
-      /*AdMob.addListener('onAdLoaded', (info) => {
+      AdMob.addListener('onAdLoaded', (info) => {
         console.log("Banner Ad Loaded");
-      });*/
+      });
     } catch (e) {
       console.log(e);
     }
@@ -181,6 +181,10 @@ class Home extends Component {
               </>
             )
           }
+          <br/>
+          <br/>
+          <br/>
+          <br/>
         </IonContent>
       </IonPage>
     );
